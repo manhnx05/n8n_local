@@ -3,11 +3,13 @@ volumes:
 
 services:
   n8n:
-    image: docker.n8n.io/n8nio/n8n
+    image: docker.n8n.io/n8nio/n8n:latest
     container_name: n8n_local
     restart: always
     ports:
       - "5678:5678"
+    env_file:
+      - .env
     environment:
       - N8N_HOST=localhost
       - N8N_PORT=5678
@@ -18,3 +20,16 @@ services:
       - TZ=Asia/Ho_Chi_Minh
     volumes:
       - n8n_data:/home/node/.n8n
+      - ./workflows:/home/node/.n8n/workflows
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5678/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - n8n_network
+
+networks:
+  n8n_network:
+    driver: bridge
