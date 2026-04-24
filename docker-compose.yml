@@ -1,5 +1,3 @@
-version: "3.8"
-
 volumes:
   n8n_data:
 
@@ -16,6 +14,7 @@ services:
       - N8N_PROTOCOL=http
       - NODE_ENV=production
       - WEBHOOK_URL=http://localhost:5678/
-      - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh # Cài đặt múi giờ Việt Nam để chạy lịch trình (Cron) cho chuẩn
+      - GENERIC_TIMEZONE=Asia/Ho_Chi_Minh
+      - TZ=Asia/Ho_Chi_Minh
     volumes:
       - n8n_data:/home/node/.n8n
