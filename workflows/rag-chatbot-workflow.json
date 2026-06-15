@@ -2,6 +2,31 @@
   "name": "RAG Chatbot for Company Documents using Google Drive and Gemini",
   "nodes": [
     {
+      "parameters": {},
+      "id": "00000000-0000-0000-0000-000000000001",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        128,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "filePath": "/home/node/.n8n/luat_lao_dong.pdf",
+        "binaryPropertyName": "data"
+      },
+      "id": "00000000-0000-0000-0000-000000000002",
+      "name": "Read Local PDF",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        320,
+        240
+      ]
+    },
+    {
       "parameters": {
         "mode": "insert",
         "pineconeIndex": {
@@ -146,105 +171,6 @@
       }
     },
     {
-      "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "={{ $json.id }}"
-        },
-        "options": {
-          "fileName": "={{ $json.name }}"
-        }
-      },
-      "id": "8bb6ebb1-1deb-498b-8da4-b809a736e097",
-      "name": "Download File From Google Drive",
-      "type": "n8n-nodes-base.googleDrive",
-      "position": [
-        288,
-        368
-      ],
-      "typeVersion": 3,
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "JZVgBu6ey5GGwXzj",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "triggerOn": "specificFolder",
-        "folderToWatch": {
-          "__rl": true,
-          "value": "1SmABU0xz52mu_PkqIkS_Nhg7ZdglHSmU",
-          "mode": "list",
-          "cachedResultName": "N8NRAGDocuments",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1SmABU0xz52mu_PkqIkS_Nhg7ZdglHSmU"
-        },
-        "event": "fileUpdated",
-        "options": {}
-      },
-      "id": "7b90daab-0fb2-4c8a-93e6-b138bb04f282",
-      "name": "Google Drive File Updated",
-      "type": "n8n-nodes-base.googleDriveTrigger",
-      "position": [
-        416,
-        144
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "JZVgBu6ey5GGwXzj",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "pollTimes": {
-          "item": [
-            {
-              "mode": "everyMinute"
-            }
-          ]
-        },
-        "triggerOn": "specificFolder",
-        "folderToWatch": {
-          "__rl": true,
-          "value": "1SmABU0xz52mu_PkqIkS_Nhg7ZdglHSmU",
-          "mode": "list",
-          "cachedResultName": "N8NRAGDocuments",
-          "cachedResultUrl": "https://drive.google.com/drive/folders/1SmABU0xz52mu_PkqIkS_Nhg7ZdglHSmU"
-        },
-        "event": "fileCreated",
-        "options": {
-          "fileType": "all"
-        }
-      },
-      "id": "3a6c6cef-7a19-42ef-8092-eaf57dae4cdd",
-      "name": "Google Drive File Created",
-      "type": "n8n-nodes-base.googleDriveTrigger",
-      "position": [
-        224,
-        144
-      ],
-      "typeVersion": 1,
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "JZVgBu6ey5GGwXzj",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
       "parameters": {},
       "id": "1e38f1c8-7bd0-4eeb-addc-62339582d350",
       "name": "Window Buffer Memory",
@@ -318,33 +244,39 @@
     "Vector Store Tool": {
       "ai_tool": [
         [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "Default Data Loader": {
       "ai_document": [
         [
-          {
-            "node": "Pinecone Vector Store",
-            "type": "ai_document",
-            "index": 0
-          }
+          [
+            {
+              "node": "Recursive Character Text Splitter",
+              "type": "ai_textSplitter",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "Window Buffer Memory": {
       "ai_memory": [
         [
-          {
-            "node": "AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
@@ -356,110 +288,117 @@
     "Embeddings Google Gemini": {
       "ai_embedding": [
         [
-          {
-            "node": "Pinecone Vector Store",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Drive File Created": {
-      "main": [
-        [
-          {
-            "node": "Download File From Google Drive",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Drive File Updated": {
-      "main": [
-        [
-          {
-            "node": "Download File From Google Drive",
-            "type": "main",
-            "index": 0
-          }
+          [
+            {
+              "node": "Pinecone Vector Store",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "When chat message received": {
       "main": [
         [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download File From Google Drive": {
-      "main": [
-        [
-          {
-            "node": "Pinecone Vector Store",
-            "type": "main",
-            "index": 0
-          }
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "Pinecone Vector Store (Retrieval)": {
       "ai_vectorStore": [
         [
-          {
-            "node": "Vector Store Tool",
-            "type": "ai_vectorStore",
-            "index": 0
-          }
+          [
+            {
+              "node": "Vector Store Tool",
+              "type": "ai_vectorStore",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "Recursive Character Text Splitter": {
       "ai_textSplitter": [
         [
-          {
-            "node": "Default Data Loader",
-            "type": "ai_textSplitter",
-            "index": 0
-          }
+          [
+            {
+              "node": "Embeddings Google Gemini",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "Embeddings Google Gemini (retrieval)": {
       "ai_embedding": [
         [
-          {
-            "node": "Pinecone Vector Store (Retrieval)",
-            "type": "ai_embedding",
-            "index": 0
-          }
+          [
+            {
+              "node": "Pinecone Vector Store (Retrieval)",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "Google Gemini Chat Model (retrieval)": {
       "ai_languageModel": [
         [
-          {
-            "node": "Vector Store Tool",
-            "type": "ai_languageModel",
-            "index": 0
-          }
+          [
+            {
+              "node": "Vector Store Tool",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
         ]
       ]
     },
     "Google Gemini Chat Model": {
       "ai_languageModel": [
         [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          [
+            {
+              "node": "Read Local PDF",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Read Local PDF": {
+      "main": [
+        [
+          [
+            {
+              "node": "Default Data Loader",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       ]
     }
