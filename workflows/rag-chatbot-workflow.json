@@ -42,7 +42,7 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
       "position": [
         656,
-        368
+        240
       ],
       "typeVersion": 1,
       "alwaysOutputData": true,
@@ -59,8 +59,8 @@
       "name": "Embeddings Google Gemini",
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "position": [
-        480,
-        480
+        656,
+        440
       ],
       "typeVersion": 1,
       "credentials": {
@@ -80,8 +80,8 @@
       "name": "Default Data Loader",
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "position": [
-        624,
-        544
+        820,
+        440
       ],
       "typeVersion": 1
     },
@@ -94,8 +94,8 @@
       "name": "Recursive Character Text Splitter",
       "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "position": [
-        624,
-        704
+        820,
+        600
       ],
       "typeVersion": 1
     },
@@ -109,8 +109,8 @@
       "name": "AI Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "position": [
-        1184,
-        368
+        1380,
+        240
       ],
       "typeVersion": 1.7
     },
@@ -123,8 +123,8 @@
       "name": "Vector Store Tool",
       "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
       "position": [
-        1504,
-        480
+        1650,
+        440
       ],
       "typeVersion": 1
     },
@@ -142,8 +142,8 @@
       "name": "Pinecone Vector Store (Retrieval)",
       "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
       "position": [
-        1424,
-        656
+        1650,
+        600
       ],
       "typeVersion": 1,
       "credentials": {
@@ -159,8 +159,8 @@
       "name": "Embeddings Google Gemini (retrieval)",
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "position": [
-        1296,
-        752
+        1650,
+        780
       ],
       "typeVersion": 1,
       "credentials": {
@@ -176,8 +176,8 @@
       "name": "Window Buffer Memory",
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "position": [
-        1280,
-        576
+        1500,
+        440
       ],
       "typeVersion": 1.3
     },
@@ -189,8 +189,8 @@
       "name": "When chat message received",
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "position": [
-        1136,
-        144
+        1140,
+        240
       ],
       "webhookId": "5f1c0c82-0ff9-40c7-9e2e-b1a96ffe24cd",
       "typeVersion": 1.1
@@ -203,8 +203,8 @@
       "name": "Google Gemini Chat Model (retrieval)",
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "position": [
-        1728,
-        576
+        1850,
+        600
       ],
       "typeVersion": 1,
       "credentials": {
@@ -222,8 +222,8 @@
       "name": "Google Gemini Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "position": [
-        1024,
-        480
+        1320,
+        440
       ],
       "typeVersion": 1,
       "credentials": {
@@ -236,146 +236,6 @@
   ],
   "pinData": {},
   "connections": {
-    "AI Agent": {
-      "main": [
-        []
-      ]
-    },
-    "Vector Store Tool": {
-      "ai_tool": [
-        [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_tool",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Default Data Loader": {
-      "ai_document": [
-        [
-          [
-            {
-              "node": "Recursive Character Text Splitter",
-              "type": "ai_textSplitter",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Window Buffer Memory": {
-      "ai_memory": [
-        [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_memory",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Pinecone Vector Store": {
-      "main": [
-        []
-      ]
-    },
-    "Embeddings Google Gemini": {
-      "ai_embedding": [
-        [
-          [
-            {
-              "node": "Pinecone Vector Store",
-              "type": "ai_embedding",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "When chat message received": {
-      "main": [
-        [
-          [
-            {
-              "node": "AI Agent",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Pinecone Vector Store (Retrieval)": {
-      "ai_vectorStore": [
-        [
-          [
-            {
-              "node": "Vector Store Tool",
-              "type": "ai_vectorStore",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Recursive Character Text Splitter": {
-      "ai_textSplitter": [
-        [
-          [
-            {
-              "node": "Embeddings Google Gemini",
-              "type": "ai_embedding",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Embeddings Google Gemini (retrieval)": {
-      "ai_embedding": [
-        [
-          [
-            {
-              "node": "Pinecone Vector Store (Retrieval)",
-              "type": "ai_embedding",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Google Gemini Chat Model (retrieval)": {
-      "ai_languageModel": [
-        [
-          [
-            {
-              "node": "Vector Store Tool",
-              "type": "ai_languageModel",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
-    "Google Gemini Chat Model": {
-      "ai_languageModel": [
-        [
-          [
-            {
-              "node": "AI Agent",
-              "type": "ai_languageModel",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
     "Start": {
       "main": [
         [
@@ -400,6 +260,146 @@
             }
           ]
         ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          [
+            {
+              "node": "Recursive Character Text Splitter",
+              "type": "ai_textSplitter",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          [
+            {
+              "node": "Embeddings Google Gemini",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          [
+            {
+              "node": "Pinecone Vector Store",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Embeddings Google Gemini (retrieval)": {
+      "ai_embedding": [
+        [
+          [
+            {
+              "node": "Pinecone Vector Store (Retrieval)",
+              "type": "ai_embedding",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Pinecone Vector Store (Retrieval)": {
+      "ai_vectorStore": [
+        [
+          [
+            {
+              "node": "Vector Store Tool",
+              "type": "ai_vectorStore",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Vector Store Tool": {
+      "ai_tool": [
+        [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_tool",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          [
+            {
+              "node": "AI Agent",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_memory",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          [
+            {
+              "node": "AI Agent",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Google Gemini Chat Model (retrieval)": {
+      "ai_languageModel": [
+        [
+          [
+            {
+              "node": "Vector Store Tool",
+              "type": "ai_languageModel",
+              "index": 0
+            }
+          ]
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "main": [
+        []
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
       ]
     }
   },
