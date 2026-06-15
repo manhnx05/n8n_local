@@ -11,6 +11,7 @@ services:
       - .env
     volumes:
       - ./data:/home/node/.n8n
+      - ./data:/home/node/.n8n-files
       - ./workflows:/home/node/.n8n/workflows
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5678/healthz"]
