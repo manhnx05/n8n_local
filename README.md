@@ -20,13 +20,15 @@ This project provides a ready-to-use n8n instance for building, testing, and man
 ```
 n8n-local/
 ├── docker-compose.yml      # Docker configuration
-├── .env                    # Environment variables
-├── .gitignore             # Git ignore rules
-├── Makefile               # Useful shortcuts
-├── README.md              # This file (comprehensive documentation)
-├── workflows/             # Workflow definitions
-│   └── example-workflow.json  # Example workflow
-└── data/                  # Local data storage
+├── .env                    # Local environment variables (ignored by Git)
+├── .env.example            # Example environment file
+├── .gitignore              # Git ignore rules
+├── Makefile                # Useful shortcuts
+├── README.md               # This file (comprehensive documentation)
+├── workflows/              # Workflow definitions
+│   ├── example-workflow.json
+│   └── rag-chatbot-workflow.json
+└── data/                   # Local N8N data storage
 ```
 
 ## ⚙️ Prerequisites
@@ -45,15 +47,16 @@ git clone <your-repo-url>
 cd N8N-Local
 ```
 
-### 2. Configure Environment (Optional)
+### 2. Configure Environment (Required)
 
-Edit `.env` file if needed for production use:
+Copy the example file and edit `.env` with your local values:
 
 ```bash
-# Update credentials, timezone, etc.
-nano .env  # Mac/Linux
-# or edit with your editor on Windows
+cp .env.example .env
+nano .env
 ```
+
+> Do not commit `.env` to Git. It is ignored by `.gitignore`.
 
 ### 3. Start N8N
 
@@ -162,6 +165,7 @@ Key configurations available:
 | `NODE_ENV` | production | Environment mode |
 | `GENERIC_TIMEZONE` | Asia/Ho_Chi_Minh | Timezone setting |
 | `WEBHOOK_URL` | http://localhost:5678/ | Webhook base URL |
+| `N8N_BASIC_AUTH_ACTIVE` | true | Enable basic auth |
 | `N8N_BASIC_AUTH_USER` | admin | Admin username |
 | `N8N_BASIC_AUTH_PASSWORD` | admin | Admin password |
 | `LOG_LEVEL` | info | Logging level |
