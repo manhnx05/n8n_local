@@ -4,7 +4,7 @@
     
     {
       "parameters": {
-        "filePath": "/home/node/.n8n/luat_lao_dong.pdf",
+        "filePath": "/home/node/.n8n-files/luat_lao_dong.pdf",
         "binaryPropertyName": "data"
       },
       "id": "00000000-0000-0000-0000-000000000002",
