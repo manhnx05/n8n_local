@@ -1,17 +1,7 @@
 {
   "name": "RAG Chatbot for Company Documents using Google Drive and Gemini",
   "nodes": [
-    {
-      "parameters": {},
-      "id": "00000000-0000-0000-0000-000000000001",
-      "name": "Start",
-      "type": "n8n-nodes-base.start",
-      "typeVersion": 1,
-      "position": [
-        128,
-        240
-      ]
-    },
+    
     {
       "parameters": {
         "filePath": "/home/node/.n8n/luat_lao_dong.pdf",
@@ -236,19 +226,7 @@
   ],
   "pinData": {},
   "connections": {
-    "Start": {
-      "main": [
-        [
-          [
-            {
-              "node": "Read Local PDF",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      ]
-    },
+    
     "Read Local PDF": {
       "main": [
         [
